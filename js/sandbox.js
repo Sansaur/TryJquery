@@ -3,7 +3,9 @@ $(document).ready(function() {
   //recorrerElDom();
   //manipulacion();
   //sugerencia();
-  navegacionPorPestañas();
+  //navegacionPorPestañas();
+  //interactividad();
+  despliegue();
 });
 
 /*
@@ -97,7 +99,7 @@ function manipulacion() {
   var nuevoModule = "<div class=module><h2>PREPÁRATE PARA UNA NUEVA IMAGEN</h2><p>INCOMING</p></div>";
   $('div.module').last().after(nuevoModule);
   //console.log($('img').first().attr('src'));
-  $('div.module').last().append("<img src="+$('img').first().attr('src')+"></img>");
+  $('div.module').last().append("<img src=" + $('img').first().attr('src') + "></img>");
 }
 /*
 Crear una sugerencia: Utilizar el texto del elemento label y aplicar una “sugerencia” en la caja de ingreso de texto
@@ -158,21 +160,21 @@ function navegacionPorPestañas() {
           <li>SegundoDiv</li>
       </ul>
     `);
-    /*
+  /*
 
-    Dejar esta mierda para otro momento
+  Dejar esta mierda para otro momento
 
-    $("#listaDesordenada>li").fn.each = function(){
-      $(this).text($('h2').first().text());
-    }
-    */
-    $("#listaDesordenada>li").click(function(){
-      var index = parseInt($(this).index());
-      $("#listaDesordenada>li").removeClass("current");
-      $(this).addClass('current');
-      $('div.module').hide();
-      $('div.module').eq(index).show();
-    });
+  $("#listaDesordenada>li").fn.each = function(){
+    $(this).text($('h2').first().text());
+  }
+  */
+  $("#listaDesordenada>li").click(function() {
+    var index = parseInt($(this).index());
+    $("#listaDesordenada>li").removeClass("current");
+    $(this).addClass('current');
+    $('div.module').hide();
+    $('div.module').eq(index).show();
+  });
 }
 /*
 Añadir alguna interactividad a la sección blog de la página.
@@ -186,7 +188,15 @@ el párrafo correspondiente también con un efecto de deslizamiento. Ayuda: No s
 de utilizar el selector :visible.
 */
 function interactividad() {
-
+  var contador = 0;
+  $('#blog').find('a').click(function() {
+    //////////////////////////////////////////////////
+      event.preventDefault();
+      $('html, body').animate({
+        scrollTop: $('h2').eq(contador).offset().top
+      }, 800);
+      contador++;
+  });
 }
 /*
 Desplegar los ítems del menú superior de la página.
@@ -199,7 +209,16 @@ Para poder realizarlo, utilice el método $.fn.hover para añadir
   incluye una clase “hover” para este propósito)
 */
 function despliegue() {
-
+  /*
+  $.fn.hover = function(){
+    alert("A");
+    $(this).find("*:hidden").addClass('hover');
+  }
+  */
+  $('#nav>li').hover(function(){
+    if($(this).find("ul")){
+    }
+  });
 }
 /*
 Mover el elemento #slideshow a la parte superior de la página;
