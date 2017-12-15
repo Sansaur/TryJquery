@@ -25,9 +25,9 @@ Seleccionar todas las filas impares del cuerpo de la tabla.
 function selecciones() {
     //
     var divsModule = $('.module');
-    //
+    // El mejor es el eq(index)
     $("#myList:nth-child(3)");
-    $("#myList").get(3);
+    $("#myList").eq(3);
     $("#myList").children()[3];
     $("#myList").find(3);
     //
@@ -39,7 +39,7 @@ function selecciones() {
     var imgsAlt = $('img').attr("alt").length;
     console.warn(imgsAlt);
     //
-    var oddTableRows = $('tr:odd')
+    var oddTableRows = $('tbody>tr:odd')
 }
 /*
 Recorrer el DOM
@@ -90,7 +90,7 @@ function manipulacion() {
             <li>Guarapo</li>
                 <li>Watermelon</li>
                     <li>Guanajo</li>
-                        <li>Waluigi</li>
+                        <li>Macarron</li>
         `);
     //
     $('#myList>li:nth-child(odd)').remove();
@@ -165,7 +165,6 @@ function navegacionPorPestañas() {
     `);
     /*
 
-    Dejar esta mierda para otro momento
 
     $("#listaDesordenada>li").fn.each = function(){
       $(this).text($('h2').first().text());
