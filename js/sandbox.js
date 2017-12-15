@@ -224,10 +224,10 @@ function despliegue() {
     */
     $("#nav>li").hover(function(){
         $(this).addClass('hover');
-        $(this).find('ul').show();
+        $(this).find('ul').show(300);
     },function(){
         $(this).removeClass('hover');
-        $(this).find('ul').hide();
+        $(this).find('ul').hide(300);
     });
 }
 /*
