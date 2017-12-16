@@ -1,11 +1,15 @@
+/*
+    Ir descomentando las funciones a medida que se quieran probar.
+*/
 $(document).ready(function() {
-  //selecciones();
-  //recorrerElDom();
-  //manipulacion();
-  //sugerencia();
-  //navegacionPorPestañas();
-  //interactividad();
-  despliegue();
+    //selecciones();
+    //recorrerElDom();
+    //manipulacion();
+    //sugerencia();
+    //navegacionPorPestañas();
+    //interactividad();
+    //despliegue();
+    //mySlideshow();
 });
 
 /*
@@ -18,28 +22,25 @@ Averiguar cuantos elementos en la página están ocultos (ayuda: .length).
 Averiguar cuantas imágenes en la página poseen el atributo alt.
 Seleccionar todas las filas impares del cuerpo de la tabla.
 */
-
-
 function selecciones() {
-  //
-  var divsModule = $('.module');
-  //
-  $("#myList:nth-child(3)");
-  $("#myList").get(3);
-  $("#myList").children()[3];
-  $("#myList").find(3);
-  //
-  $('input').closest('label');
-  //
-  var hiddens = $('*:hidden').length;
-  console.warn(hiddens);
-  //
-  var imgsAlt = $('img').attr("alt").length;
-  console.warn(imgsAlt);
-  //
-  var oddTableRows = $('tr:odd')
+    //
+    var divsModule = $('.module');
+    //
+    $("#myList:nth-child(3)");
+    $("#myList").get(3);
+    $("#myList").children()[3];
+    $("#myList").find(3);
+    //
+    $('input').closest('label');
+    //
+    var hiddens = $('*:hidden').length;
+    console.warn(hiddens);
+    //
+    var imgsAlt = $('img').attr("alt").length;
+    console.warn(imgsAlt);
+    //
+    var oddTableRows = $('tr:odd')
 }
-
 /*
 Recorrer el DOM
 
@@ -50,26 +51,28 @@ Seleccionar el elemento select dentro de #specials; luego dirigirse hacia el bot
 Seleccionar el primer ítem de la lista en el elemento #slideshow; añadirle la clase “current” al mismo y luego añadir la clase “disabled” a los elementos hermanos.
 */
 function recorrerElDom() {
-  $('img').each(function() {
-    var attr = $(this).attr("alt");
-    if (attr) {
-      console.log(attr);
-    }
-  });
-  //
-  $('input').closest('form').addClass('clase');
-  //
-  var closestCurrent = $('#myList').closest('.current');
-  closestCurrent.removeClass('.current');
-  closestCurrent.next().addClass('.current');
-  //
-  $('#specials').closest('select').closest('input[type="submit"]');
-  //
-  var firstSlideshow = $('#slideshow').find(1);
-  firstSlideshow.addClass('current');
-  firstSlideshow.siblings().each(function() {
-    $(this).addClass('.disabled');
-  });
+    $('img').each(function() {
+        var attr = $(this).attr("alt");
+        if (attr) {
+            console.log(attr);
+        }
+    });
+    //
+    $('input').closest('form').addClass('clase');
+    //
+    var closestCurrent = $('#myList').find('.current');
+    $(closestCurrent).removeClass('current');
+    $(closestCurrent).next().addClass('current');
+    //
+    // $('#specials').find('select') está funcionando
+    // $('#specials').find('select').parent().parent().find('input[type=submit]').val()) = SOLUCIÓN PRIMARIA Y CHUSTA
+    console.log($('#specials').find('select').parent().parent().find('input[type=submit]').val());
+    //
+    var firstSlideshow = $('#slideshow').children().first();
+    $(firstSlideshow).addClass('current');
+    $(firstSlideshow).siblings().each(function() {
+        $(this).addClass('disabled');
+    });
 }
 /*
 Manipulación
@@ -81,25 +84,25 @@ Añadir otra opción al elemento select; darle a la opción añadida el valor �
 Añadir un nuevo div.module a la página después del último; luego añadir una copia de una de las imágenes existentes dentro del nuevo div.
 */
 function manipulacion() {
-  //
-  $('#myList').append(`
+    //
+    $('#myList').append(`
         <li>Wachipanduzi</li>
             <li>Guarapo</li>
                 <li>Watermelon</li>
                     <li>Guanajo</li>
                         <li>Waluigi</li>
         `);
-  //
-  $('#myList>li:nth-child(odd)').remove();
-  //
-  $('div.module').last().append('<h2>Eis</h2><p>Warup</p>');
-  //
-  $('select').find('option').last().after('<option value=Wednesday>Wednesday</option>');
-  //
-  var nuevoModule = "<div class=module><h2>PREPÁRATE PARA UNA NUEVA IMAGEN</h2><p>INCOMING</p></div>";
-  $('div.module').last().after(nuevoModule);
-  //console.log($('img').first().attr('src'));
-  $('div.module').last().append("<img src=" + $('img').first().attr('src') + "></img>");
+    //
+    $('#myList>li:nth-child(odd)').remove();
+    //
+    $('div.module').last().append('<h2>Eis</h2><p>Warup</p>');
+    //
+    $('select').find('option').last().after('<option value=Wednesday>Wednesday</option>');
+    //
+    var nuevoModule = "<div class=module><h2>PREPÁRATE PARA UNA NUEVA IMAGEN</h2><p>INCOMING</p></div>";
+    $('div.module').last().after(nuevoModule);
+    //console.log($('img').first().attr('src'));
+    $('div.module').last().append("<img src=" + $('img').first().attr('src') + "></img>");
 }
 /*
 Crear una sugerencia: Utilizar el texto del elemento label y aplicar una “sugerencia” en la caja de ingreso de texto
@@ -111,26 +114,26 @@ Vincular un evento focus en el input para remover el texto de sugerencia y la cl
 Vincular un evento blur en el input para restaurar el texto de sugerencia y la clase “hint” en caso que no se haya ingresado algún texto.
 */
 function sugerencia() {
-  //
-  var texto = $('label').text();
-  //
-  var elementoInput = $('label').next('input');
-  //console.log(elementoInput.attr('class'))
-  $(elementoInput).val(texto);
-  //
-  $(elementoInput).addClass('hint');
-  //
-  $('label').remove();
-  //
-  $(elementoInput).on('focus', function() {
-    $(elementoInput).val("");
-    $(elementoInput).removeClass('hint');
-  });
-  //
-  $(elementoInput).on('blur', function() {
+    //
+    var texto = $('label').text();
+    //
+    var elementoInput = $('label').next('input');
+    //console.log(elementoInput.attr('class'))
     $(elementoInput).val(texto);
+    //
     $(elementoInput).addClass('hint');
-  });
+    //
+    $('label').remove();
+    //
+    $(elementoInput).on('focus', function() {
+        $(elementoInput).val("");
+        $(elementoInput).removeClass('hint');
+    });
+    //
+    $(elementoInput).on('blur', function() {
+        $(elementoInput).val(texto);
+        $(elementoInput).addClass('hint');
+    });
 }
 /*
 Crear una navegación por pestañas para los dos elementos div.module
@@ -153,28 +156,28 @@ remueva la clase “current” del otro ítem de la lista.
 Finalmente, mostrar la primera pestaña.
 */
 function navegacionPorPestañas() {
-  $('div.module').hide();
-  $('div.module').first().before(`
+    $('div.module').hide();
+    $('div.module').first().before(`
       <ul id=listaDesordenada>
         <li>PrimerDiv</li>
           <li>SegundoDiv</li>
       </ul>
     `);
-  /*
+    /*
 
-  Dejar esta mierda para otro momento
+    Dejar esta mierda para otro momento
 
-  $("#listaDesordenada>li").fn.each = function(){
-    $(this).text($('h2').first().text());
-  }
-  */
-  $("#listaDesordenada>li").click(function() {
-    var index = parseInt($(this).index());
-    $("#listaDesordenada>li").removeClass("current");
-    $(this).addClass('current');
-    $('div.module').hide();
-    $('div.module').eq(index).show();
-  });
+    $("#listaDesordenada>li").fn.each = function(){
+      $(this).text($('h2').first().text());
+    }
+    */
+    $("#listaDesordenada>li").click(function() {
+        var index = parseInt($(this).index());
+        $("#listaDesordenada>li").removeClass("current");
+        $(this).addClass('current');
+        $('div.module').hide();
+        $('div.module').eq(index).show();
+    });
 }
 /*
 Añadir alguna interactividad a la sección blog de la página.
@@ -188,15 +191,15 @@ el párrafo correspondiente también con un efecto de deslizamiento. Ayuda: No s
 de utilizar el selector :visible.
 */
 function interactividad() {
-  var contador = 0;
-  $('#blog').find('a').click(function() {
-    //////////////////////////////////////////////////
-      event.preventDefault();
-      $('html, body').animate({
-        scrollTop: $('h2').eq(contador).offset().top
-      }, 800);
-      contador++;
-  });
+    var contador = 0;
+    $('#blog').find('a').click(function() {
+        //////////////////////////////////////////////////
+        event.preventDefault();
+        $('html, body').animate({
+            scrollTop: $('h2').eq(contador).offset().top
+        }, 800);
+        contador++;
+    });
 }
 /*
 Desplegar los ítems del menú superior de la página.
@@ -209,16 +212,24 @@ Para poder realizarlo, utilice el método $.fn.hover para añadir
   incluye una clase “hover” para este propósito)
 */
 function despliegue() {
-  /*
-  $.fn.hover = function(){
-    alert("A");
-    $(this).find("*:hidden").addClass('hover');
-  }
-  */
-  $('#nav>li').hover(function(){
-    if($(this).find("ul")){
+    /*
+    $.fn.hover = function(){
+      alert("A");
+      $(this).find("*:hidden").addClass('hover');
     }
-  });
+    */
+    /*
+        APRENDIZAJE IMPORTANTE
+        LA PRIMERA FUNCTION() DE UN EVENTO JQUERY ES LO QUE OCURRE CUANDO ESTÁ EL EVENTO ACTIVO.
+        LA SEGUNDA FUNCTION() DE UN EVENTO JQUERY ES LO QUE OCURRE CUANDO SE DESACTIVA EL EVENTO.
+    */
+    $("#nav>li").hover(function(){
+        $(this).addClass('hover');
+        $(this).find('ul').show();
+    },function(){
+        $(this).removeClass('hover');
+        $(this).find('ul').hide();
+    });
 }
 /*
 Mover el elemento #slideshow a la parte superior de la página;
@@ -234,5 +245,26 @@ Incluir un área de navegación por debajo del slideshow que muestre cuantas
   útil).
 */
 function mySlideshow() {
-
+    // Mover para arriba de la página
+    $('#slideshow').detach().prependTo('body');
+    //
+    var current = $('#slideshow').children().first();
+    // Esconderlos todos
+    $('#slideshow').children().each(
+        function() {
+            $(this).hide();
+        }
+    );
+    // Mostrar el CURRENT (Que al principio es el primero)
+    $(current).show();
+    // Intervalo
+    setInterval(function() {
+        $(current).hide(1000,"linear",function(){});
+        $(current).next().show(1000,"linear");
+        current = $(current).next();
+        if (!$(current).length) {
+            current = $('#slideshow').children().first();
+            $(current).show(2000,"linear",function(){$(current).next().hide(function(){});});
+        }
+    }, 5000);
 }
